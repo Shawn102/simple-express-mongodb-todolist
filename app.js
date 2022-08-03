@@ -61,7 +61,7 @@ app.post("/", (req, res) => {
 
 // Creating a custom route using url params
 app.get("/:customListName", (req, res) => {
-  const customListName = req.params.customListName;
+  const customListName = _.capitalize(req.params.customListName);
 
   List.findOne({ name: customListName }, (err, foundList) => {
     if (!err) {
@@ -122,7 +122,7 @@ app.get("/about", (req, res) => {
 //Declaring a variable for my port
 let port = process.env.PORT;
 
-if(port == null || port == "") {
+if (port == null || port == "") {
   port = 4000;
 }
 
