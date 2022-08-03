@@ -1,0 +1,36 @@
+<%- include('header'); -%>
+<div class="box" id="heading">
+  <h1><%= listTitle %></h1>
+</div>
+<div class="box">
+  <form class="item text-btn-fix" action="/" method="post">
+    <div>
+      <input
+        type="text"
+        name="txt"
+        placeholder="Add Notes..."
+        autocomplete="off"
+      />
+    </div>
+    <div>
+      <button type="submit" name="button" value="<%= listTitle %>">+</button>
+    </div>
+  </form>
+
+  <% newListItems.map(item => { %>
+  <form action="/delete" method="post">
+    <div class="item">
+      <input type="checkbox" name="checkbox" value="<%= item._id %>" onchange="this.form.submit()" />
+      <p><%= item.name %></p>
+    </div>
+    <input type="hidden" name="hiddenTitle" value="<%= listTitle %>">
+  </form>
+  <% }) %>
+</div>
+<%if(newListItems.length === 0) { %>
+<h1 class="h1-empty">Your list is currently empty...</h1>
+<% } %> 
+<%if(newListItems.length > 0) { %>
+  <h3 class="h3-checkbox-warning">Hit the checkbox to delete a notes permanently</h3>
+  <% } %> 
+<%- include('footer'); -%>
